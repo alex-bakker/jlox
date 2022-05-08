@@ -11,7 +11,7 @@ import java.util.List;
 public class Lox {
     static boolean hadError = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if(args.length > 1) {
             System.out.println("Usage: jlox [script]");
             System.exit(64);
@@ -34,7 +34,7 @@ public class Lox {
         BufferedReader reader = new BufferedReader(input);
 
         for(;;) {
-            System.out.println("> ");
+            System.out.print("> ");
             String line = reader.readLine();
             if(line == null) break;
             run(line);
@@ -47,7 +47,7 @@ public class Lox {
         List<Token> tokens = scanner.scanTokens();
 
         for(Token token : tokens) {
-            System.out.println(token);
+            System.out.print(token + " || ");
         }
     }
 
@@ -56,7 +56,7 @@ public class Lox {
     }
 
    private static void report(int line, String where, String message) {
-        System.err.println("[line: " + line + "] Error " + where ": " + message);
+        System.err.println("[line: " + line + "] Error " + where + ": " + message);
         hadError = true;
    }
 

@@ -1,3 +1,6 @@
 ## Intellij Generated Files
 .idea/
 *.iml
+
+## Build results
+out/
