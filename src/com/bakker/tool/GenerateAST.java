@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 //TODO: Can probably generate records instead?
-
 public class GenerateAST {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         if (args.length != 1) {
@@ -20,7 +19,8 @@ public class GenerateAST {
                 "Binary     : Expr left, Token operator, Expr right",
                 "Grouping   : Expr expression",
                 "Literal    : Object value",
-                "Unary      : Token operator, Expr right"
+                "Unary      : Token operator, Expr right",
+                "Ternary    : Expr cond, Expr left, Expr right"
         ));
     }
 

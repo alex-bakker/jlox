@@ -1,11 +1,1 @@
-/*
-    Returns the circumference of a circle given the diameter
-    param: diameter
-    returns: A number
-*/
-
-fun diameter(diameter) {
-  var pi = 3.14159;
-
-  return pi * diameter;
-}
+"hello" + 37 * 9
