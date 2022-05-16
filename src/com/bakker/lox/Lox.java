@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lox {
     static boolean hadError = false;
@@ -50,18 +52,11 @@ public class Lox {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 
-//        for(Token token : tokens) {
-//            System.out.print(token + " || ");
-//        }
-//        System.out.println();
-
         Parser parser = new Parser(tokens);
         List<Stmt> statements = parser.parse();
 
         // Stop if there was a syntax error.
         if (hadError) return;
-
-//        System.out.println(new AstPrinter().print(expression));
 
         interpreter.interpret(statements);
     }
