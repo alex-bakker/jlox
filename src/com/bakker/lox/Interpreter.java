@@ -151,7 +151,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     }
 
     /**
-     * For efficiency should  only evaluate one of left or right
+     * For efficiency should only evaluate one of left or right
      * But then the code: [true ? 1 : 1 * -"cat"] is fine since the right is never evaluated
      * Who knows :D
      */
@@ -189,9 +189,9 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitIfStmt(Stmt.If stmt) {
-        if (isTruthy(stmt.expression)) {
+        if (isTruthy(evaluate(stmt.expression))) {
             execute(stmt.thenBranch);
-        } else {
+        } else if(stmt.elseBranch != null){
             execute(stmt.elseBranch);
         }
         return null;
@@ -202,6 +202,14 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         Object value = evaluate(stmt.expression);
         System.out.println(stringify(value));
         return null;
+    }
+
+    @Override
+    public Void visitReturnStmt(Stmt.Return stmt) {
+        Object value = null;
+        if (stmt.value != null) value = evaluate(stmt.value);
+
+        throw new Return(value);
     }
 
     @Override

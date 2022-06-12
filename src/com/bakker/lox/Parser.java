@@ -53,6 +53,7 @@ public class Parser {
         if (match(FOR)) return forStatement();
         if (match(IF)) return ifStatement();
         if (match(PRINT)) return printStatement();
+        if (match(RETURN)) return returnStatement();
         if (match(WHILE)) return whileStatement();
         if (match(LEFT_BRACE)) return new Stmt.Block(block());
 
@@ -139,7 +140,7 @@ public class Parser {
         Stmt thenBranch = statement();
         Stmt elseBranch = match(ELSE) ? statement() : null;
 
-        return new Stmt.If(expression(), thenBranch, elseBranch);
+        return new Stmt.If(condition, thenBranch, elseBranch);
     }
 
     private List<Stmt> block() {
@@ -158,6 +159,16 @@ public class Parser {
        return new Stmt.Print(value);
     }
 
+    private Stmt returnStatement() {
+        Token keyword = previous();
+        Expr value = null;
+        if(!check(SEMICOLON)) {
+            value = expression();
+        }
+        consume(SEMICOLON, "Expect ';' after return value");
+        return new Stmt.Return(keyword, value);
+    }
+
     private Stmt expressionStatement() {
         Expr expr = expression();
         consume(SEMICOLON, "Expect ';' after expression.");
@@ -168,8 +179,6 @@ public class Parser {
      * Allows for comma separated expressions.
      *
      * Ex. f(a), g(b)
-     *
-     * TODO: Commented out because it broke param lists
      */
     private Expr expression() {
         Expr expr = assignment();
