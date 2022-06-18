@@ -1,10 +1,9 @@
-fun getHelloPrinter(name) {
-    fun doHello() {
-        print "Hello there " + name + "!";
-    }
-    return doHello;
+class Box {}
+
+fun notMethod(argument) {
+  print "called function with " + argument;
 }
 
-var name = "Alex";
-var alexPrinter = getHelloPrinter(name);
-alexPrinter();
+var box = Box();
+box.function = notMethod;
+box.function("argument");
