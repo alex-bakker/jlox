@@ -1,9 +1,15 @@
-class Box {}
+class Person {
+    init(fName, lName, hobby) {
+        this.fName = fName;
+        this.lName = lName;
+        this.hobby = hobby;
+    }
 
-fun notMethod(argument) {
-  print "called function with " + argument;
+    greet() {
+        print "Hello, my name is " + this.fName + " " + this.lName + ". My favourite hobby is " + this.hobby + ".";
+    }
 }
 
-var box = Box();
-box.function = notMethod;
-box.function("argument");
+var alex = Person("Alex", "Austen", "Tennis");
+alex.greet();
+
