@@ -1,15 +1,19 @@
-class Person {
-    init(fName, lName, hobby) {
-        this.fName = fName;
-        this.lName = lName;
-        this.hobby = hobby;
-    }
-
-    greet() {
-        print "Hello, my name is " + this.fName + " " + this.lName + ". My favourite hobby is " + this.hobby + ".";
-    }
+class A {
+  method() {
+    print "A method";
+  }
 }
 
-var alex = Person("Alex", "Austen", "Tennis");
-alex.greet();
+class B < A {
+  method() {
+    print "B method";
+  }
 
+  test() {
+    super.method();
+  }
+}
+
+class C < B {}
+
+C().test();
