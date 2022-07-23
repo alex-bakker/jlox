@@ -1,5 +1,7 @@
 package com.bakker.lox;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -148,6 +150,15 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             if (!isTruthy(left)) return left;
         }
         return evaluate(expr.right);
+    }
+
+    @Override
+    public Object visitReadExpr(Expr.Read expr) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+           return br.readLine();
+        } catch (Exception e) {
+            throw new RuntimeError(expr.keyword, "Failed to read from STDIN");
+        }
     }
 
     @Override

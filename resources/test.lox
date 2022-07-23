@@ -1,19 +1,15 @@
-class A {
+class HelloSayer {
   method() {
-    print "A method";
+    print "Hello There";
   }
 }
 
-class B < A {
+class Poller < HelloSayer {
   method() {
-    print "B method";
-  }
-
-  test() {
+    var in = read;
+    print in;
     super.method();
   }
 }
 
-class C < B {}
-
-C().test();
+Poller().method();

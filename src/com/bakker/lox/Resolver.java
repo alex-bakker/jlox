@@ -135,6 +135,12 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         return null;
     }
 
+    /** Nothing to resolve */
+    @Override
+    public Void visitReadExpr(Expr.Read expr) {
+        return null;
+    }
+
     @Override
     public Void visitSetExpr(Expr.Set expr) {
         resolve(expr.value);

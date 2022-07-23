@@ -380,6 +380,7 @@ public class Parser {
         if (match(TRUE)) return new Expr.Literal(true);
         if (match(NIL)) return new Expr.Literal(null);
         if (match(THIS)) return new Expr.This(previous());
+        if (match(READ)) return new Expr.Read(previous());
 
         if (match(NUMBER, STRING)) {
             return new Expr.Literal(previous().literal);
